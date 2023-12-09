@@ -2,13 +2,15 @@ from settings import WEATHER_TEXT
 
 
 def print_history(data_from_file: list):
-    count_weather_data = input("\nСколько последних записей вы хотите увидеть? ")
+    if len(data_from_file) == 0:
+        print("Истории запросов пока что нет.")
+        return
 
+    count_weather_data = input("\nСколько последних записей вы хотите увидеть? ")
+    data_from_file.reverse()
     if count_weather_data.isdigit():
         count_weather_data = int(count_weather_data)
-        if count_weather_data == 0:
-            print("Истории запросов пока что нет.")
-        elif count_weather_data >= len(data_from_file):
+        if count_weather_data >= len(data_from_file):
             for record in data_from_file:
                 output_data_weather(record)
         else:
